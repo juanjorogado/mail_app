@@ -120,6 +120,8 @@ ipcMain.handle("fetch-emails", async (event, accountId, folder = "INBOX", page =
     // Usar el nuevo servicio de Gmail
     const result = await gmailService.fetchEmails(accountId, folder, pageSize);
     
+    loggers.app.info('Emails fetched from service', { count: result.data.length, firstEmailId: result.data[0]?.id });
+    
     // Almacenar en caché
     cache.set(cacheKey, result, 5 * 60 * 1000); // 5 minutos
     
