@@ -144,8 +144,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         try {
             const response = await window.electronAPI.fetchEmails(currentAccountId, folder);
+            console.log('Emails response:', response);
             if (response.success) {
                 currentFetchedMessages = response.data; // Almacenar los mensajes reales
+                console.log('First email:', currentFetchedMessages[0]);
                 renderMessages(currentFetchedMessages, mailboxType);
             } else {
                 console.error('Error al cargar emails:', response.error);
