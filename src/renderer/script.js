@@ -4,12 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const connectAccountButton = document.getElementById('connect-account-button');
 
     const mailboxItems = document.querySelectorAll('.mailbox-item');
-    const mailboxTitleElement = document.querySelector('.mailboxes-section .mailbox-title');
 
-    const messageListContainer = document.getElementById('message-list-container');
-    const messageListTitleElement = document.querySelector('.main-content .text-xl.font-bold');
-    const messageListCountElement = document.querySelector('.main-content .messages-subtitle');
     const messageList = document.getElementById('message-list');
+    const messageListTitleElement = document.querySelector('.main-content .text-xl.font-bold') || document.querySelector('[class*="flex-1 bg-white"] h2');
+    const messageListCountElement = document.querySelector('.main-content .messages-subtitle') || document.querySelector('[class*="flex-1 bg-white"] .text-gray-500');
 
     const messageDetail = document.getElementById('message-detail');
     const messageTitle = document.getElementById('message-title');
@@ -193,15 +191,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Simulate button actions
-    document.querySelector('.mailboxes-section .edit-button').addEventListener('click', () => alert('Funcionalidad de "Editar buzones" (simulada).'));
-    document.querySelector('.mailboxes-section button.bg-purple-100').addEventListener('click', async () => {
-        if (currentAccountId) {
-            // window.electronAPI.openComposeWindow(); // Abrir ventana de redacción
-            alert('Funcionalidad de "Escribir mensaje" (simulada). Se abriría una ventana de redacción.');
-        } else {
-            alert('Conecta una cuenta primero para escribir un mensaje.');
-        }
-    });
+    const editButton = document.querySelector('.mailboxes-section .edit-button') || document.querySelector('button.text-purple-600');
+    if (editButton) {
+        editButton.addEventListener('click', () => alert('Funcionalidad de "Editar buzones" (simulada).'));
+    }
+    
+    const composeButton = document.querySelector('.mailboxes-section button.bg-purple-100') || document.querySelector('#composeButton');
+    if (composeButton) {
+        composeButton.addEventListener('click', async () => {
+            if (currentAccountId) {
+                // window.electronAPI.openComposeWindow(); // Abrir ventana de redacción
+                alert('Funcionalidad de "Escribir mensaje" (simulada). Se abriría una ventana de redacción.');
+            } else {
+                alert('Conecta una cuenta primero para escribir un mensaje.');
+            }
+        });
+    }
     
     // Asegúrate de que este elemento existe en tu index.html
     const logoutButton = document.querySelector('.mailboxes-section .text-blue-500');
@@ -226,19 +231,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    document.querySelector('.main-content .search-button').addEventListener('click', () => alert('Funcionalidad de "Buscar mensajes" (simulada).'));
-    document.querySelector('.main-content .options-icon').addEventListener('click', () => alert('Funcionalidad de "Opciones de lista de mensajes" (simulada).'));
+    
+    // Opcional: búsqueda y opciones de mensajes
+    const searchButton = document.querySelector('.main-content .search-button');
+    if (searchButton) {
+        searchButton.addEventListener('click', () => alert('Funcionalidad de "Buscar mensajes" (simulada).'));
+    }
+    
+    const optionsIcon = document.querySelector('.main-content .options-icon');
+    if (optionsIcon) {
+        optionsIcon.addEventListener('click', () => alert('Funcionalidad de "Opciones de lista de mensajes" (simulada).'));
+    }
 
-    document.querySelectorAll('#message-detail button').forEach(button => {
-        button.addEventListener('click', () => {
-            const buttonText = button.textContent.trim();
-            let alertMessage = `Funcionalidad de "${buttonText}" (simulada).`;
-            if (buttonText === 'Eliminar') {
-                alertMessage = 'Funcionalidad de "Eliminar mensaje" (simulada).';
-            }
-            alert(alertMessage);
+    const messageDetailButtons = document.querySelectorAll('#message-detail button');
+    if (messageDetailButtons && messageDetailButtons.length > 0) {
+        messageDetailButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const buttonText = button.textContent.trim();
+                let alertMessage = `Funcionalidad de "${buttonText}" (simulada).`;
+                if (buttonText === 'Eliminar') {
+                    alertMessage = 'Funcionalidad de "Eliminar mensaje" (simulada).';
+                }
+                alert(alertMessage);
+            });
         });
-    });
+    }
 
     // Establecer la selección inicial del buzón (ej. 'Recibidos') si ya hay cuenta conectada
     // Esto se manejará después de la autenticación
