@@ -1,4 +1,6 @@
-/**
+git remote add origin https://github.com/juanjorogado/mail_app.git
+    git branch -M main
+git push -u origin main/**
  * Sistema de Configuración Centralizado
  * Gestiona la configuración de la aplicación con validación y entornos
  */
