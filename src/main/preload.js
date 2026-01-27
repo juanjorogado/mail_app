@@ -5,7 +5,7 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 // Exponer APIs seguras del IPC a la ventana del renderizador
-contextBridge.exposeInMainWorld('electronAPI', {
+const api = {
     listAccounts: () => ipcRenderer.invoke('list-accounts'),
     addGmailAccount: () => ipcRenderer.invoke('add-gmail-account'),
     removeAccount: (id) => ipcRenderer.invoke('remove-account', id),
@@ -13,5 +13,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
     fetchEmailDetails: (accountId, emailId) => ipcRenderer.invoke('fetch-email-details', accountId, emailId),
     fetchCalendar: (accountId) => ipcRenderer.invoke('fetch-calendar', accountId),
     sendEmail: (payload) => ipcRenderer.invoke('send-email', payload),
-    openComposeWindow: () => ipcRenderer.send('open-compose'),
-});
+    openCompose: () => ipcRenderer.send('open-compose'),
+};
+
+contextBridge.exposeInMainWorld('api', api);
+contextBridge.exposeInMainWorld('electronAPI', api);

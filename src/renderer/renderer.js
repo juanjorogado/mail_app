@@ -1,13 +1,111 @@
 // IPC is accessed via window.api provided by preload.js
 
+// Función para mostrar notificaciones
+window.showNotification = function(message, type = 'info', duration = 3000) {
+  // Crear elemento de notificación
+  const notification = document.createElement('div');
+  notification.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 4px;
+    color: white;
+    font-weight: 500;
+    z-index: 10000;
+    max-width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.3s ease-out;
+  `;
+  
+  // Establecer color según tipo
+  const colors = {
+    'success': '#27ae60',
+    'error': '#e74c3c',
+    'warning': '#f39c12',
+    'info': '#3498db'
+  };
+  
+  notification.style.backgroundColor = colors[type] || colors['info'];
+  notification.textContent = message;
+  
+  document.body.appendChild(notification);
+  
+  // Auto-remover después del tiempo especificado
+  setTimeout(() => {
+    notification.style.animation = 'slideOut 0.3s ease-out';
+    setTimeout(() => {
+      notification.remove();
+    }, 300);
+  }, duration);
+};
+
+// Estilos para las animaciones
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes slideIn {
+    from {
+      transform: translateX(400px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideOut {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(400px);
+      opacity: 0;
+    }
+  }
+`;
+document.head.appendChild(style);
+
 // Estado global
 let currentAccountId = null;
 let currentFolder = "INBOX";
 
 // Compose Button: delegate to main process to open a proper window
-document.getElementById("composeButton").addEventListener("click", () => {
-  window.api.openCompose();
-});
+// Conectar botón de agregar cuenta desde onboarding
+const connectButton = document.getElementById("connect-account-button");
+if (connectButton) {
+  connectButton.addEventListener("click", async () => {
+    const button = connectButton;
+    const originalText = button.textContent;
+    button.disabled = true;
+    button.textContent = "Adding...";
+    
+    try {
+      const result = await window.api.addGmailAccount();
+      if (result && result.success) {
+        window.showNotification('Gmail account added successfully!', 'success', 3000);
+        await loadAccounts();
+      } else {
+        const errorMsg = result?.error || 'Failed to add Gmail account';
+        window.showNotification(errorMsg, 'error', 5000);
+      }
+    } catch (error) {
+      console.error("Error adding Gmail account:", error);
+      window.showNotification('Failed to add Gmail account. Please try again.', 'error', 5000);
+    } finally {
+      button.disabled = false;
+      button.textContent = originalText;
+    }
+  });
+}
+
+const composeButton = document.getElementById("composeButton");
+if (composeButton) {
+  composeButton.addEventListener("click", () => {
+    window.api.openCompose();
+  });
+}
 
 document.getElementById("addGmail").addEventListener("click", async () => {
   const button = document.getElementById("addGmail");
@@ -37,6 +135,9 @@ document.getElementById("addGmail").addEventListener("click", async () => {
 async function loadAccounts() {
   const accounts = await window.api.listAccounts();
   const accDiv = document.getElementById("accounts");
+  const onboarding = document.getElementById("onboarding-screen");
+  const mainApp = document.getElementById("main-app-screen");
+  
   accDiv.innerHTML = "";
   
   if (accounts.length === 0) {
@@ -44,8 +145,16 @@ async function loadAccounts() {
     noAccounts.textContent = "No accounts";
     noAccounts.style.cssText = "color: #95a5a6; font-style: italic; padding: 10px;";
     accDiv.appendChild(noAccounts);
+    
+    // Mostrar onboarding, ocultar main app
+    if (onboarding) onboarding.classList.remove("hidden");
+    if (mainApp) mainApp.classList.add("hidden");
     return;
   }
+  
+  // Mostrar main app, ocultar onboarding
+  if (onboarding) onboarding.classList.add("hidden");
+  if (mainApp) mainApp.classList.remove("hidden");
   
   accounts.forEach((a) => {
     const accountContainer = document.createElement("div");
@@ -141,13 +250,48 @@ async function loadAccountData(accountId) {
 }
 
 function renderEmails(emails) {
-  const emailList = document.getElementById("emailList");
-  emailList.innerHTML = "";
-  (emails || []).forEach((e) => {
+  const messageList = document.getElementById("message-list");
+  if (!messageList) {
+    console.error("message-list element not found");
+    return;
+  }
+  
+  messageList.innerHTML = "";
+  
+  if (!emails || emails.length === 0) {
+    const noEmails = document.createElement("div");
+    noEmails.style.cssText = "padding: 20px; text-align: center; color: #95a5a6;";
+    noEmails.textContent = "No emails found";
+    messageList.appendChild(noEmails);
+    return;
+  }
+  
+  emails.forEach((email, index) => {
     const item = document.createElement("div");
-    item.className = "email-item";
-    item.innerHTML = `<div><strong>${e.subject || "No Subject"}</strong></div><div>${e.snippet || ""}</div>`;
-    emailList.appendChild(item);
+    item.className = "message-item";
+    item.style.cssText = "padding: 12px; border-bottom: 1px solid #ecf0f1; hover:bg-gray-50; cursor: pointer;";
+    item.setAttribute("data-message-id", email.id || index);
+    
+    const sender = email.from || "Unknown Sender";
+    const subject = email.subject || "(No subject)";
+    const snippet = email.snippet || "";
+    const date = email.date ? new Date(email.date).toLocaleDateString('es-ES') : "";
+    
+    item.innerHTML = `
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+        <span style="font-weight: 600; color: #2c3e50;">${sender}</span>
+        <span style="font-size: 12px; color: #7f8c8d;">${date}</span>
+      </div>
+      <p style="color: #34495e; font-size: 14px; margin: 3px 0; font-weight: 500;">${subject}</p>
+      <p style="color: #95a5a6; font-size: 12px; margin: 3px 0;">${snippet}</p>
+    `;
+    
+    item.addEventListener("click", () => {
+      // Aquí puedes manejar la selección del mensaje
+      console.log("Selected email:", email);
+    });
+    
+    messageList.appendChild(item);
   });
   
   // Actualizar contadores de mailbox
@@ -155,19 +299,12 @@ function renderEmails(emails) {
 }
 
 function renderCalendar(events) {
-  // Simple placeholder rendering in emailList area for now
-  const emailList = document.getElementById("emailList");
-  const el = document.createElement("div");
-  el.style.marginTop = "12px";
-  el.innerHTML = `<strong>Upcoming Events:</strong>`;
-  const ul = document.createElement("ul");
-  (events || []).forEach((ev) => {
-    const li = document.createElement("li");
-    li.textContent = `${ev.start} - ${ev.summary || 'No Title'}`;
-    ul.appendChild(li);
-  });
-  el.appendChild(ul);
-  emailList.appendChild(el);
+  // Calendar rendering is not yet implemented in the new UI
+  // This function is a placeholder
+  if (!events || events.length === 0) {
+    return;
+  }
+  console.log('Calendar events:', events);
 }
 
 // Setup menu navigation
