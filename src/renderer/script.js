@@ -1,9 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOMContentLoaded event fired');
     const onboardingScreen = document.getElementById('onboarding-screen');
     const mainAppScreen = document.getElementById('main-app-screen');
     const connectAccountButton = document.getElementById('connect-account-button');
 
+    console.log('Elements found:', {
+        onboarding: !!onboardingScreen,
+        mainApp: !!mainAppScreen,
+        connectBtn: !!connectAccountButton
+    });
+
     const mailboxItems = document.querySelectorAll('.mailbox-item');
+    console.log('Mailbox items found:', mailboxItems.length);
 
     const messageList = document.getElementById('message-list');
     const messageListTitleElement = document.querySelector('.main-content .text-xl.font-bold') || document.querySelector('[class*="flex-1 bg-white"] h2');
@@ -24,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Función para renderizar mensajes basada en el buzón
     async function renderMessages(messagesToRender, mailboxType) {
+        console.log('renderMessages called with', messagesToRender.length, 'messages, type:', mailboxType);
         messageList.innerHTML = '';
        
         if (mailboxType === 'all') {
@@ -41,6 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
             displayMessageDetail(null); // Borrar el detalle del mensaje
             return;
         }
+
+        console.log('About to render', messagesToRender.length, 'messages');
 
         messagesToRender.forEach(msg => {
             const messageItem = document.createElement('div');
@@ -282,13 +293,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Comprobar si ya hay cuentas conectadas al inicio
     async function checkExistingAccounts() {
+        console.log('checkExistingAccounts called');
         try {
             const accounts = await window.electronAPI.listAccounts();
+            console.log('Accounts from API:', accounts);
             if (accounts && accounts.length > 0) {
                 const firstAccount = accounts[0];
                 currentAccountId = firstAccount.id;
+                console.log('Setting currentAccountId to:', currentAccountId);
                 onboardingScreen.classList.add('hidden');
                 mainAppScreen.classList.remove('hidden');
+                console.log('Loading emails for first account');
                 loadEmailsForMailbox('INBOX', 'all');
                 document.getElementById('currentAccount').textContent = firstAccount.email;
                 // Activar el buzón "Recibidos" por defecto
