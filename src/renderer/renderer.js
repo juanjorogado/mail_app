@@ -268,6 +268,7 @@ function renderEmails(emails) {
     return;
   }
   
+  console.log("renderEmails called with:", emails);
   messageList.innerHTML = "";
   
   if (!emails || emails.length === 0) {
