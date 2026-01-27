@@ -48,7 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!msg.read) {
                 messageItem.classList.add('font-bold');
             }
-            messageItem.dataset.messageId = msg.id;
+            // Usar el id si existe, sino usar el threadId, sino usar el from como identificador temporal
+            const emailId = msg.id || msg.threadId || (msg.from + msg.date);
+            messageItem.dataset.messageId = emailId;
             messageItem.innerHTML = `
                 <div class="flex justify-between items-center">
                     <span class="font-semibold">${msg.from}</span>
@@ -67,16 +69,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 event.currentTarget.classList.add('bg-gray-200'); // Resaltar el mensaje seleccionado
 
                 const selectedId = event.currentTarget.dataset.messageId;
-                if (currentAccountId) {
-                    const detailResponse = await window.electronAPI.fetchEmailDetails(currentAccountId, selectedId);
-                    if (detailResponse.success) {
-                        displayMessageDetail(detailResponse.data);
-                    } else {
-                        console.error('Error al obtener detalles del mensaje:', detailResponse.error);
-                        alert('Error al cargar el detalle del mensaje.');
+                if (currentAccountId && selectedId) {
+                    // Buscar el email en currentFetchedMessages para obtener detalles
+                    const selectedEmail = currentFetchedMessages.find(email => 
+                        email.id === selectedId || 
+                        email.threadId === selectedId ||
+                        (email.from + email.date) === selectedId
+                    );
+                    
+                    if (selectedEmail) {
+                        displayMessageDetail(selectedEmail);
+                    } else if (selectedEmail && selectedEmail.id) {
+                        // Si tiene ID, intentar obtener detalles completos
+                        const detailResponse = await window.electronAPI.fetchEmailDetails(currentAccountId, selectedEmail.id);
+                        if (detailResponse.success) {
+                            displayMessageDetail(detailResponse.data);
+                        } else {
+                            console.error('Error al obtener detalles del mensaje:', detailResponse.error);
+                            displayMessageDetail(selectedEmail);
+                        }
                     }
                 } else {
-                    alert('No hay cuenta conectada para ver los detalles del mensaje.');
+                    alert('No hay información del mensaje disponible.');
                 }
             });
         });
@@ -84,8 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Seleccionar el primer mensaje por defecto
         if (messagesToRender.length > 0) {
             document.querySelector('.message-item').classList.add('bg-gray-200');
-            // También cargar el detalle del primer mensaje
-            if (currentAccountId) {
+            // También cargar el detalle del primer mensaje si hay un ID válido
+            if (currentAccountId && messagesToRender[0].id) {
                 const firstMessageId = messagesToRender[0].id;
                 const detailResponse = await window.electronAPI.fetchEmailDetails(currentAccountId, firstMessageId);
                 if (detailResponse.success) {
@@ -93,6 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     console.error('Error al obtener detalles del primer mensaje:', detailResponse.error);
                 }
+            } else {
+                console.log('Skipping email details load - no valid ID or no accountId');
             }
         }
     }
@@ -147,7 +163,9 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Emails response:', response);
             if (response.success) {
                 currentFetchedMessages = response.data; // Almacenar los mensajes reales
-                console.log('First email:', currentFetchedMessages[0]);
+                console.log('First email raw:', currentFetchedMessages[0]);
+                console.log('First email JSON:', JSON.stringify(currentFetchedMessages[0], null, 2));
+                console.log('First email keys:', Object.keys(currentFetchedMessages[0] || {}));
                 renderMessages(currentFetchedMessages, mailboxType);
             } else {
                 console.error('Error al cargar emails:', response.error);
