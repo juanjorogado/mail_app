@@ -190,6 +190,18 @@ async function loadAccounts() {
     accountContainer.appendChild(deleteBtn);
     accDiv.appendChild(accountContainer);
   });
+  
+  // Cargar automáticamente la primera cuenta
+  if (accounts.length > 0) {
+    const firstAccount = accounts[0];
+    const accountId = firstAccount.email || firstAccount.id;
+    currentAccountId = accountId;
+    const currentAccountEl = document.getElementById("currentAccount");
+    if (currentAccountEl) {
+      currentAccountEl.textContent = firstAccount.email || firstAccount.id || "Account";
+    }
+    await loadAccountData(accountId);
+  }
 }
 
 async function removeAccount(accountId) {
