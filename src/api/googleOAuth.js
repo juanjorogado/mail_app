@@ -72,8 +72,19 @@ exports.startFlow = async () => {
             tokens: tokens,
           };
           
-          Accounts.addAccount(account);
-          loggers.accounts.created(account.id, { email: account.email });
+          // Intentar agregar la cuenta, si ya existe actualizar tokens
+          try {
+            Accounts.addAccount(account);
+            loggers.accounts.created(account.id, { email: account.email });
+          } catch (addError) {
+            if (addError.message === 'Account already exists') {
+              loggers.app.info('Account already exists, updating tokens', { email: account.email });
+              await Accounts.updateAccountTokens(account.id, tokens);
+              loggers.accounts.created(account.id, { email: account.email, updated: true });
+            } else {
+              throw addError;
+            }
+          }
           
           res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
           res.end(`

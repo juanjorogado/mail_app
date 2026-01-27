@@ -83,6 +83,7 @@ const loggers = {
 
   // Logs de cuentas
   accounts: {
+    info: (message, meta = {}) => logger.info(`[ACCOUNTS] ${message}`, meta),
     created: (accountId, meta = {}) => logger.info(`[ACCOUNTS] Account created: ${accountId}`, { ...meta, type: 'account_created' }),
     removed: (accountId, meta = {}) => logger.info(`[ACCOUNTS] Account removed: ${accountId}`, { ...meta, type: 'account_removed' }),
     error: (operation, error, meta = {}) => logger.error(`[ACCOUNTS] ${operation} failed`, { ...meta, error: error.message })
