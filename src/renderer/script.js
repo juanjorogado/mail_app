@@ -295,8 +295,10 @@ document.addEventListener('DOMContentLoaded', () => {
     async function checkExistingAccounts() {
         console.log('checkExistingAccounts called');
         try {
-            const accounts = await window.electronAPI.listAccounts();
-            console.log('Accounts from API:', accounts);
+            const response = await window.electronAPI.listAccounts();
+            console.log('Accounts response from API:', response);
+            const accounts = response?.data || [];
+            console.log('Extracted accounts array:', accounts);
             if (accounts && accounts.length > 0) {
                 const firstAccount = accounts[0];
                 currentAccountId = firstAccount.id;

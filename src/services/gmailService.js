@@ -495,7 +495,8 @@ class GmailService {
       );
       
       const batchResults = await Promise.all(batchPromises);
-      results.push(...batchResults);
+      // Extraer .data de cada resultado de la API
+      results.push(...batchResults.map(result => result.data));
     }
     
     return results;
