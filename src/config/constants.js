@@ -8,7 +8,7 @@ module.exports = {
   GOOGLE: {
     CLIENT_ID: "30387474326-a17tkpngohmibqdllm9t1c2erme98g66.apps.googleusercontent.com",
     CLIENT_SECRET: "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",
-    REDIRECT_URI: "urn:ietf:wg:oauth:2.0:oob",
+    REDIRECT_URI: "http://localhost:3000/oauth2callback",
     SCOPES: [
       "https://www.googleapis.com/auth/gmail.readonly",
       "https://www.googleapis.com/auth/gmail.send",

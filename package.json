@@ -28,7 +28,7 @@
   "author": "j.",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^40.0.0",
+    "electron": "^29.0.0",
     "electron-builder": "^26.4.0",
     "electron-installer-debian": "^3.2.0",
     "electron-packager": "^17.1.2",
