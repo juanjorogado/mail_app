@@ -1,0 +1,51 @@
+{
+  "name": "mail_app",
+  "version": "1.0.0",
+  "description": "A minimal mail app for Ubuntu",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "dev:profile": "electron . --profile",
+    "dev:debug": "electron . --debug",
+    "build": "electron-builder build",
+    "package": "electron-packager . --out=dist --overwrite",
+    "installer": "electron-installer-debian --src=dist/ --dest=dist/installers/ --arch=amd64",
+    "test": "jest",
+    "test:unit": "jest --testPathPattern=unit",
+    "test:integration": "jest --testPathPattern=integration",
+    "test:e2e": "jest --testPathPattern=e2e",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
+    "lint": "eslint src/ --ext .js,.ts",
+    "lint:fix": "eslint src/ --ext .js,.ts --fix",
+    "format": "prettier --write src/",
+    "health:check": "node scripts/health-check.js",
+    "cache:clean": "node scripts/clean-cache.js",
+    "logs:clean": "node scripts/clean-logs.js",
+    "db:optimize": "node scripts/optimize-db.js"
+  },
+  "author": "j.",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^40.0.0",
+    "electron-builder": "^26.4.0",
+    "electron-installer-debian": "^3.2.0",
+    "electron-packager": "^17.1.2",
+    "eslint": "^9.39.2",
+    "jest": "^30.2.0",
+    "prettier": "^3.8.1"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "eventsource": "^4.1.0",
+    "googleapis": "^105.0.0",
+    "imap": "^0.8.17",
+    "mailparser": "^3.6.5",
+    "mcp-remote": "^0.1.37",
+    "node-fetch": "^3.3.2",
+    "nodemailer": "^7.0.12",
+    "winston": "^3.19.0",
+    "ws": "^8.19.0"
+  }
+}

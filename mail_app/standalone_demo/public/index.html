@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Standalone MCP Demo - Mailboxes</title>
+  <style>
+    :root { --bg: #f7f9fb; --purple:#6b5bd8; }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; font-family: Inter, system-ui, Arial, sans-serif; background: linear-gradient(135deg, #eaf6ff 0%, #fff 60%); }
+    .container { display: grid; grid-template-columns: 280px 1fr 1fr; gap: 0; height: 100vh; }
+    .pane { padding: 20px; border-right: 1px solid #e5e5e5; background:#fff; overflow:auto; }
+    .pane.right { border-right: none; border-left: 1px solid #e5e5e5; }
+    .title { font-size: 24px; font-weight: 700; margin-bottom: 12px; }
+    #mailboxList { list-style: none; padding: 0; margin: 0; }
+    .mailbox { padding: 12px 8px; border-bottom: 1px solid #eee; display:flex; justify-content: space-between; }
+    #structure { white-space: pre-wrap; font-family: monospace; padding: 12px; border:1px solid #eee; height: 60vh; overflow:auto; }
+    @media (max-width: 900px) {
+      .container { grid-template-columns: 1fr; height: auto; }
+      .pane { border-right: none; border-left: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="app">
+    <section class="pane" aria-label="Mailboxes">
+      <div class="title">Mailboxes</div>
+      <ul id="mailboxList"></ul>
+      <button class="cta" style="margin-top:12px; border:2px solid var(--purple); color:var(--purple); padding:10px 14px; border-radius:999px; background:#fff;">Escribir mensaje</button>
+    </section>
+    <section class="pane" aria-label="Emails" id="emailsPane">
+      <div class="title">Recibidos</div>
+      <div id="emails" style="min-height:300px;"></div>
+    </section>
+    <section class="pane right" aria-label="Email content" id="viewerPane">
+      <div class="title">Detalle del correo</div>
+      <div id="viewerContent">Selecciona un correo para ver su contenido</div>
+    </section>
+  </div>
+  <script src="mcp_client.js"></script>
+  <script>
+    // Se puede usar para inicializar mensajes estáticos mientras se conecta MCP
+  </script>
+</body>
+</html>

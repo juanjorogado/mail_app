@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Compose Email</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <script src="notifications.js"></script>
+        <script src="validation.js"></script>
+        <div class="compose-container">
+            <div class="compose-header">
+                <h2>Compose Email</h2>
+                <button id="closeCompose">Close</button>
+            </div>
+            <form id="composeForm">
+                <div class="form-group">
+                    <label for="accountSelect">Account:</label>
+                    <select id="accountSelect"></select>
+                </div>
+                <div class="form-group">
+                    <label for="to">To:</label>
+                    <input type="email" id="to" required />
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="subject" required />
+                </div>
+                <div class="form-group">
+                    <label for="body">Body:</label>
+                    <textarea id="body" rows="10" required></textarea>
+                </div>
+                <button type="submit" id="sendButton">Send</button>
+            </form>
+        </div>
+        <script src="compose.js"></script>
+    </body>
+</html>
