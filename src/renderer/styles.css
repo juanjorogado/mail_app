@@ -14,7 +14,6 @@
     --font-size-title: 25px;
     --font-weight-normal: 400;
     --font-weight-medium: 500;
-    --font-weight-bold: 700;
     --line-height-base: 1.2;
     
     /* Spacing */
@@ -36,6 +35,7 @@
     --item-gap: 8px;
     --button-padding-horizontal: 16px;
     --button-padding-vertical: 8px;
+    --button-padding-left-with-icon: 8px;
     
     /* Button Styles */
     --button-background-color: #5241cd;
@@ -88,6 +88,12 @@
     --welcome-button-border: 1px solid #5241cd;
     --welcome-button-text-color: #5241cd;
     --welcome-svg-size: 24px;
+}
+
+/* Button with icon - reduce left padding */
+button:has(> [class*="icon"]),
+.button-with-icon {
+    padding-left: var(--button-padding-left-with-icon) !important;
 }
 
 
@@ -519,9 +525,11 @@ body {
     height: 24px;
 }
 
-
-
-.connect-button {
+.connect-svg {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+}
 
 .connect-text {
     color: #5241cd;
@@ -753,7 +761,7 @@ body {
 .form-group label {
     display: block;
     margin-bottom: 5px;
-    font-weight: bold;
+    font-weight: var(--font-weight-medium);
 }
 
 .form-group input,
