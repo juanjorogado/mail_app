@@ -27,7 +27,10 @@
     --radius-sm: 8px;
     --radius-md: 32px;
     --radius-pill: 100px;
-}
+    
+    /* Welcome Screen */
+    --welcome-logo-size: 96px;
+    --welcome-gap: 32px;
 
 /* General Styles */
 body {
@@ -258,42 +261,35 @@ p {
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
-    gap: 32px;
+    gap: var(--welcome-gap);
 }
 
 .welcome-logo {
     position: relative;
-    width: 96px;
-    height: 96px;
+    width: var(--welcome-logo-size);
+    height: var(--welcome-logo-size);
 }
 
 .logo-gradient {
     position: absolute;
-    width: 96px;
-    height: 96px;
+    width: var(--welcome-logo-size);
+    height: var(--welcome-logo-size);
     background: linear-gradient(to bottom, #080a0c, #080a0c00);
 }
 
 .logo-circle {
     border-radius: 50%;
     position: absolute;
-    width: 96px;
-    height: 96px;
+    width: var(--welcome-logo-size);
+    height: var(--welcome-logo-size);
     border: 1px solid #000;
 }
 
 .welcome-text-group {
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: var(--welcome-gap);
 }
-
-.welcome-text {
-    font-size: var(--font-size-title);
-    font-weight: var(--font-weight-normal);
-}
-
-
 
 .connect-icon {
     width: 24px;
