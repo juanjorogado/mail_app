@@ -180,16 +180,33 @@ button:has(> [class*="icon"]) {
     align-items: center;
 }
 
-.messages-title {
-    font-size: var(--font-size-title);
-    font-weight: var(--font-weight-normal);
+/* Typography - Base Styles */
+h1, h2, h3, h4, h5, h6 {
     margin: 0;
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-normal);
 }
 
-.messages-subtitle {
-    font-size: var(--font-size-body);
-    color: var(--color-text-subtle);
+h1, h2 {
+    font-size: var(--font-size-title);
+    color: var(--color-text-primary);
+}
+
+p {
     margin: 0;
+    font-family: var(--font-family);
+    font-size: var(--font-size-body);
+    color: var(--color-text-primary);
+}
+
+/* Text - Subtle variant */
+.text-subtle {
+    color: var(--color-text-subtle);
+}
+
+/* Text - Secondary variant */
+.text-secondary {
+    color: var(--color-text-secondary);
 }
 
 
@@ -232,7 +249,6 @@ button:has(> [class*="icon"]) {
     align-items: center;
     gap: var(--spacing-md);
     cursor: pointer;
-    font-size: var(--font-size-body);
 }
 
 .sign-out-account {
@@ -292,7 +308,6 @@ button:has(> [class*="icon"]) {
 .welcome-text {
     font-size: var(--font-size-title);
     font-weight: var(--font-weight-normal);
-    margin: 0;
 }
 
 
@@ -341,7 +356,6 @@ button:has(> [class*="icon"]) {
 
 .compose-header h2 {
     margin: 0;
-    font-size: var(--font-size-title);
 }
 
 
