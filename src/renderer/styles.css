@@ -1,7 +1,71 @@
 /* Design Tokens from Penpot */
 
-/* Welcome Screen Variables */
 :root {
+    /* Colors */
+    --color-text-primary: #080a0c;
+    --color-text-secondary: #5241cd;
+    --color-text-subtle: #999999;
+    --color-divider: #e0e0e0;
+    --color-background: #ffffff;
+    
+    /* Typography */
+    --font-family: 'Inter', 'Helvetica Neue', Helvetica, sans-serif;
+    --font-size-base: 16px;
+    --font-size-title: 25px;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
+    --line-height-base: 1.2;
+    
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 12px;
+    --spacing-lg: 16px;
+    --spacing-xl: 20px;
+    --spacing-2xl: 24px;
+    --spacing-3xl: 32px;
+    
+    /* Layout */
+    --sidebar-width: 240px;
+    --sidebar-padding-vertical: 16px;
+    --sidebar-padding-horizontal: 16px;
+    --content-padding-vertical: 16px;
+    --panel-gap: 16px;
+    --section-gap: 16px;
+    --item-gap: 8px;
+    --button-padding-horizontal: 16px;
+    --button-padding-vertical: 8px;
+    
+    /* Button Styles */
+    --button-background-color: #5241cd;
+    --button-text-color: #ffffff;
+    --button-width: 100%;
+    --send-button-background-color: #5241cd;
+    --send-button-text-color: #ffffff;
+    --send-button-padding-vertical: 8px;
+    --send-button-padding-horizontal: 16px;
+    --send-button-hover-background-color: #4235a8;
+    
+    /* Mailbox Styles */
+    --mailbox-width: 240px;
+    --mailbox-header-height: 24px;
+    --mailbox-title-width: 200px;
+    --mailbox-title-height: 24px;
+    --mailbox-item-height: 24px;
+    --mailbox-count-min-width: 55px;
+    --edit-button-width: 60px;
+    --edit-button-height: 32px;
+    --border-color: #e0e0e0;
+    
+    /* Border Radius */
+    --border-radius: 8px;
+    --border-radius-base: 8px;
+    --border-radius-panel: 8px;
+    --border-radius-pill: 100px;
+    --border-radius-button: 8px;
+    
+    /* Welcome Screen Variables */
     --welcome-container-width: 1496px;
     --welcome-container-height: 651px;
     --welcome-container-padding: 3.5rem; /* 56px */
