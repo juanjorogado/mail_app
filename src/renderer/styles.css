@@ -209,8 +209,6 @@ p {
     color: var(--color-text-secondary);
 }
 
-
-
 .options-icon {
     font-size: var(--font-size-title);
     color: var(--color-text-subtle);
@@ -222,19 +220,6 @@ p {
     flex-direction: column;
     gap: var(--spacing-sm);
     margin: var(--spacing-lg) 0;
-}
-
-.accounts-list button {
-    width: 100%;
-    padding: var(--spacing-sm);
-    background-color: transparent;
-    border: 1px solid var(--color-divider);
-    border-radius: var(--radius-pill);
-    cursor: pointer;
-    font-family: var(--font-family);
-    font-size: var(--font-size-body);
-    text-align: left;
-    color: var(--color-text-primary);
 }
 
 /* Sign Out */
@@ -254,8 +239,6 @@ p {
 .sign-out-account {
     color: var(--color-text-primary);
 }
-
-/* Welcome Screen */
 .welcome-container {
     display: flex;
     flex-direction: column;
