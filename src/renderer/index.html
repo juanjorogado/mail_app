@@ -7,40 +7,55 @@
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="https://accounts.google.com/gsi/client" async defer></script>
         <link rel="stylesheet" href="styles.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+        <style>
+            * {
+                font-family: 'Inter', 'Helvetica Neue', Helvetica, sans-serif;
+            }
+
+            @keyframes gradientShift {
+                0% {
+                    background-position: 0% 0%;
+                }
+                50% {
+                    background-position: 100% 100%;
+                }
+                100% {
+                    background-position: 0% 0%;
+                }
+            }
+
+            #onboarding-screen {
+                background: linear-gradient(to bottom, rgba(196, 239, 239, 1) 4%, rgba(255, 255, 255, 0) 77%, rgba(244, 241, 167, 0.4931506849315068) 100%);
+                background-size: 200% 200%;
+                animation: gradientShift 15s ease-in-out infinite;
+            }
+
+            #onboarding-screen::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                border-radius: 32px;
+                pointer-events: none;
+            }
+        </style>
     </head>
     <body>
-                <div id="onboarding-screen" class="flex h-screen overflow-hidden items-center justify-center">
-            <div class="flex flex-col grid p-14 items-start justify-evenly absolute top-[-202px] left-[-449px] w-[1496px] h-max bg-gradient-to-tr from-[#c4efef] to-white/0 rounded-[32px]">
-              <div class="flex flex-col grid gap-y-12 gap-x-14 items-start justify-start w-full h-[651px]">
-                <div class="relative size-[96px]">
-                  <div class="absolute size-[96px] bg-gradient-to-b from-[#080a0c] to-[#080a0c]/0">
-                    <div class="rounded-[100%] absolute top-[-146px] left-[-393px] size-[96px] border-1 border-black"></div>
-                    <div class="absolute top-[-194px] left-[-441px] size-[192px]">
-                      <div class="rounded-[100%] absolute top-[-194px] left-[-441px] size-[96px] border-1 border-[#000]"></div>
-                      <div class="rounded-[100%] absolute top-[-98px] left-[-441px] size-[96px] border-1 border-[#000]"></div>
-                      <div class="rounded-[100%] absolute top-[-194px] left-[-345px] size-[96px] border-1 border-[#000]"></div>
-                      <div class="rounded-[100%] absolute top-[-98px] left-[-345px] size-[96px] border-1 border-[#000]"></div>
-                    </div>
-                  </div>
+        <div id="onboarding-screen" class="fixed inset-0 flex items-center justify-center rounded-[32px] overflow-hidden">
+            <div class="flex flex-col items-center justify-center gap-12 text-center max-w-2xl px-8">
+                <div class="flex flex-col gap-6">
+                    <h1 class="text-5xl font-bold text-gray-900">
+                        Para empezar, conecta una cuenta de Gmail
+                    </h1>
                 </div>
-                <div class="flex flex-col grid gap-y-6 items-start justify-start w-full h-max">
-                  <div class="flex flex-col grid gap-y-8 items-start justify-start w-full h-max">
-                    <div class="relative w-full h-[30px]">
-                      <div class="text-black text-[25px] leading-[1.2] absolute">
-                        para empezar conecta una cuenta de gmail.
-                      </div>
-                    </div>
-                    <div id="connect-account-button" class="flex grid py-2 px-4 gap-x-2 items-center justify-start size-max rounded-[100px] border-1 border-[#5241cd]">
-                      <div class="relative size-[24px]">
-                        <svg class="absolute size-[24px]"></svg>
-                      </div>
-                      <div class="text-[#5241cd] text-base relative">
-                        Conectar cuenta
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                <button id="connect-account-button" class="flex items-center justify-center gap-2 px-6 py-3 rounded-full border-2 border-purple-600 text-purple-600 font-semibold hover:bg-purple-50 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+                    </svg>
+                    Conectar con Google
+                </button>
             </div>
         </div>
 
