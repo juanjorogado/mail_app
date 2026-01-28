@@ -11,16 +11,52 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
         <style>
+            :root {
+                /* Design Tokens - Colors */
+                --primary-color: #5241cd;
+                --primary-light: #f3f0ff;
+                --text-primary: #080a0c;
+                --text-secondary: #6b7280;
+                --bg-primary: #ffffff;
+                --bg-secondary: #f3f4f6;
+                
+                /* Design Tokens - Typography */
+                --font-family: 'Inter', 'Helvetica Neue', Helvetica, sans-serif;
+                --font-size-base: 16px;
+                --font-size-heading: 25px;
+                --font-weight-normal: 400;
+                --font-weight-semibold: 600;
+                
+                /* Design Tokens - Spacing */
+                --padding-page: 3.5rem; /* 56px */
+                --gap-md: 32px;
+                --gap-sm: 12px;
+                
+                /* Design Tokens - Border Radius */
+                --radius-full: 100px;
+                --radius-container: 32px;
+                
+                /* Design Tokens - Size */
+                --logo-size: 96px;
+            }
+
             * {
-                font-family: 'Inter', 'Helvetica Neue', Helvetica, sans-serif;
+                font-family: var(--font-family);
             }
 
             /* Button styles token */
             button {
-                border-radius: 100px;
-                border: 1px solid #5241cd;
+                border-radius: var(--radius-full);
+                border: 1px solid var(--primary-color);
                 padding: 8px 16px;
-                font: normal none 400 16/1.5 "Inter";
+                font: var(--font-weight-normal) none var(--font-weight-normal) var(--font-size-base)/1.5 var(--font-family);
+                color: var(--primary-color);
+                cursor: pointer;
+                transition: background-color 0.2s;
+            }
+
+            button:hover {
+                background-color: var(--primary-light);
             }
 
             @keyframes gradientShift {
@@ -39,38 +75,39 @@
                 background: linear-gradient(to bottom, rgba(196, 239, 239, 1) 4%, rgba(255, 255, 255, 0) 77%, rgba(244, 241, 167, 0.4931506849315068) 100%);
                 background-size: 200% 200%;
                 animation: gradientShift 15s ease-in-out infinite;
+                padding: var(--padding-page);
             }
 
             #onboarding-screen::before {
                 content: '';
                 position: absolute;
                 inset: 0;
-                border-radius: 32px;
+                border-radius: var(--radius-container);
                 pointer-events: none;
             }
         </style>
     </head>
     <body>
-        <div id="onboarding-screen" class="fixed inset-0 flex items-start justify-start rounded-[32px] overflow-hidden p-14">
+        <div id="onboarding-screen" class="fixed inset-0 flex items-start justify-start rounded-[32px] overflow-hidden">
             <div class="flex flex-col items-start justify-start max-w-2xl">
                 <!-- Logo -->
-                <div class="w-24 h-24">
+                <div style="width: var(--logo-size); height: var(--logo-size);">
                     <img src="./assets/logo.svg" alt="Mail App Logo" class="w-full h-full"/>
                 </div>
                 
                 <!-- Texto y Botón Container -->
-                <div class="flex flex-col gap-8 items-start">
+                <div style="display: flex; flex-direction: column; gap: var(--gap-md); align-items: flex-start;">
                     <!-- Texto -->
-                    <h1 style="font: normal none 400 25/1.2 'Inter';">
+                    <h1 style="font: var(--font-weight-normal) none var(--font-weight-normal) var(--font-size-heading)/1.2 var(--font-family); color: var(--text-primary); margin: 0;">
                         Para empezar, conecta una cuenta de Gmail
                     </h1>
                     
                     <!-- Botón -->
-                    <button id="connect-account-button" class="text-[#5241cd] font-semibold hover:bg-purple-50 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 inline-block mr-2" viewBox="0 0 24 24" fill="currentColor">
+                    <button id="connect-account-button" aria-label="Conectar con Google">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 inline-block mr-2" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
                         </svg>
-                        Conectar con Google
+                        <span>Conectar con Google</span>
                     </button>
                 </div>
             </div>
