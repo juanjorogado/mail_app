@@ -25,6 +25,7 @@
     
     /* Border Radius - only 2 */
     --radius-sm: 8px;
+    --radius-md: 32px;
     --radius-pill: 100px;
 }
 
@@ -103,26 +104,10 @@ body {
     font-size: var(--font-size-body);
 }
 
-.edit-button {
-    background-color: transparent;
-    color: var(--color-text-secondary);
-    border: 1px solid var(--color-text-secondary);
-    padding: var(--spacing-sm) var(--spacing-md);
-    cursor: pointer;
-    border-radius: var(--radius-pill);
-    font-size: var(--font-size-body);
-    font-weight: var(--font-weight-normal);
-}
 
-.edit-button:hover {
-    background-color: var(--color-text-secondary);
-    color: white;
-}
 
-/* Buttons */
-#composeButton,
-#addGmail {
-    width: 100%;
+/* Base Button Styles */
+button {
     padding: var(--spacing-sm) var(--spacing-lg);
     border-radius: var(--radius-pill);
     font-family: var(--font-family);
@@ -130,19 +115,43 @@ body {
     font-weight: var(--font-weight-normal);
     cursor: pointer;
     border: none;
-}
-
-#composeButton {
     background-color: var(--color-text-secondary);
     color: var(--color-background);
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+/* Button Primary (default) */
+#composeButton,
+#sendButton {
+    width: 100%;
     margin-bottom: var(--spacing-lg);
 }
 
-#addGmail {
+/* Button Secondary */
+#addGmail,
+.edit-button,
+.search-button,
+.connect-button {
     background-color: transparent;
-    color: var(--color-text-primary);
+    color: var(--color-text-secondary);
     border: 1px solid var(--color-text-secondary);
+}
+
+#addGmail,
+.connect-button {
+    width: 100%;
     margin-bottom: var(--spacing-lg);
+}
+
+/* Button Error */
+.compose-header button {
+    background-color: var(--color-error);
+    color: white;
+    width: auto;
+    margin-bottom: 0;
 }
 
 /* Button with icon - reduce left padding */
@@ -183,23 +192,7 @@ button:has(> [class*="icon"]) {
     margin: 0;
 }
 
-.search-button {
-    background-color: transparent;
-    color: var(--color-text-secondary);
-    border: 1px solid var(--color-text-secondary);
-    padding: var(--spacing-sm) var(--spacing-lg);
-    cursor: pointer;
-    border-radius: var(--radius-sm);
-    font-size: var(--font-size-body);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.search-button:hover {
-    background-color: var(--color-text-secondary);
-    color: white;
-}
 
 .options-icon {
     font-size: var(--font-size-title);
@@ -224,10 +217,7 @@ button:has(> [class*="icon"]) {
     font-family: var(--font-family);
     font-size: var(--font-size-body);
     text-align: left;
-}
-
-.accounts-list button:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+    color: var(--color-text-primary);
 }
 
 /* Sign Out */
@@ -305,18 +295,7 @@ button:has(> [class*="icon"]) {
     margin: 0;
 }
 
-.connect-button {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    border-radius: var(--radius-pill);
-    border: 1px solid var(--color-text-secondary);
-    background-color: transparent;
-    cursor: pointer;
-    font-size: var(--font-size-body);
-    color: var(--color-text-secondary);
-}
+
 
 .connect-icon {
     width: 24px;
@@ -365,15 +344,7 @@ button:has(> [class*="icon"]) {
     font-size: var(--font-size-title);
 }
 
-.compose-header button {
-    background-color: var(--color-error);
-    color: white;
-    border: none;
-    padding: var(--spacing-sm) var(--spacing-lg);
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    font-size: var(--font-size-body);
-}
+
 
 .form-group {
     margin-bottom: var(--spacing-lg);
@@ -395,17 +366,4 @@ button:has(> [class*="icon"]) {
     font-size: var(--font-size-body);
 }
 
-#sendButton {
-    background-color: var(--color-text-secondary);
-    color: white;
-    border: none;
-    padding: var(--spacing-sm) var(--spacing-lg);
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    font-size: var(--font-size-body);
-    font-weight: var(--font-weight-normal);
-}
 
-#sendButton:hover {
-    background-color: #4235a8;
-}
