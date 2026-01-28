@@ -1,4 +1,4 @@
-/* Design Tokens from Penpot */
+/* Design Tokens - Minimal & Scalable */
 
 :root {
     /* Colors */
@@ -7,186 +7,100 @@
     --color-text-subtle: #999999;
     --color-divider: #e0e0e0;
     --color-background: #ffffff;
+    --color-accent-light: #f3f0ff;
+    --color-error: #e74c3c;
     
     /* Typography */
     --font-family: 'Inter', 'Helvetica Neue', Helvetica, sans-serif;
-    --font-size-base: 16px;
+    --font-size-body: 16px;
     --font-size-title: 25px;
     --font-weight-normal: 400;
     --font-weight-medium: 500;
-    --line-height-base: 1.2;
+    --line-height: 1.2;
     
-    /* Spacing */
-    --spacing-xs: 4px;
+    /* Spacing - only need 3 sizes */
     --spacing-sm: 8px;
     --spacing-md: 12px;
     --spacing-lg: 16px;
-    --spacing-xl: 20px;
-    --spacing-2xl: 24px;
-    --spacing-3xl: 32px;
     
-    /* Layout */
-    --sidebar-width: 240px;
-    --sidebar-padding-vertical: 16px;
-    --sidebar-padding-horizontal: 16px;
-    --content-padding-vertical: 16px;
-    --panel-gap: 16px;
-    --section-gap: 16px;
-    --item-gap: 8px;
-    --button-padding-horizontal: 16px;
-    --button-padding-vertical: 8px;
-    --button-padding-left-with-icon: 8px;
-    
-    /* Button Styles */
-    --button-background-color: #5241cd;
-    --button-text-color: #ffffff;
-    --button-width: 100%;
-    --send-button-background-color: #5241cd;
-    --send-button-text-color: #ffffff;
-    --send-button-padding-vertical: 8px;
-    --send-button-padding-horizontal: 16px;
-    --send-button-hover-background-color: #4235a8;
-    
-    /* Mailbox Styles */
-    --mailbox-width: 240px;
-    --mailbox-header-height: 24px;
-    --mailbox-title-width: 200px;
-    --mailbox-title-height: 24px;
-    --mailbox-item-height: 24px;
-    --mailbox-count-min-width: 55px;
-    --edit-button-width: 60px;
-    --edit-button-height: 32px;
-    --border-color: #e0e0e0;
-    
-    /* Border Radius */
-    --border-radius: 8px;
-    --border-radius-base: 8px;
-    --border-radius-panel: 8px;
-    --border-radius-pill: 100px;
-    --border-radius-button: 8px;
-    
-    /* Welcome Screen Variables */
-    --welcome-container-width: 1496px;
-    --welcome-container-height: 651px;
-    --welcome-container-padding: 3.5rem; /* 56px */
-    --welcome-container-top: -202px;
-    --welcome-container-left: -449px;
-    --welcome-container-border-radius: 32px;
-    --welcome-gradient-start: #c4efef;
-    --welcome-gradient-end: #ffffff00;
-    --welcome-logo-size: 96px;
-    --welcome-logo-gradient-start: #080a0c;
-    --welcome-logo-gradient-end: #080a0c00;
-    --welcome-circle-size: 96px;
-    --welcome-large-circle-size: 192px;
-    --welcome-circle-border: 1px solid #000;
-    --welcome-text-size: 25px;
-    --welcome-text-height: 30px;
-    --welcome-button-padding-y: 0.5rem; /* 8px */
-    --welcome-button-padding-x: 1rem; /* 16px */
-    --welcome-button-gap: 0.5rem; /* 8px */
-    --welcome-button-border: 1px solid #5241cd;
-    --welcome-button-text-color: #5241cd;
-    --welcome-svg-size: 24px;
+    /* Border Radius - only 2 */
+    --radius-sm: 8px;
+    --radius-pill: 100px;
 }
 
-/* Button with icon - reduce left padding */
-button:has(> [class*="icon"]),
-.button-with-icon {
-    padding-left: var(--button-padding-left-with-icon) !important;
-}
-
-
+/* General Styles */
 body {
     margin: 0;
     padding: 0;
     font-family: var(--font-family);
-    background-color: var(--background-color);
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
 }
 
 .app-container {
     display: flex;
     height: 100vh;
-    gap: var(--panel-gap);
-    border-radius: var(--border-radius-panel);
+    gap: var(--spacing-lg);
 }
 
+/* Sidebar */
 .sidebar {
-    width: var(--sidebar-width);
-    background-color: var(--color-background);
-    color: var(--color-text-primary);
-    padding: var(--sidebar-padding-vertical) var(--sidebar-padding-horizontal);
+    width: 240px;
+    padding: var(--spacing-lg);
     display: flex;
     flex-direction: column;
-    font-family: var(--font-family);
-    justify-content: flex-start;
-    border-radius: var(--border-radius-panel);
+    gap: var(--spacing-lg);
     flex-shrink: 0;
-    row-gap: var(--spacing-lg);
 }
 
-#composeButton {
-    background-color: var(--button-background-color);
-    color: var(--button-text-color);
-    border: none;
-    padding: var(--button-padding-vertical) var(--button-padding-horizontal);
-    margin: 0 0 var(--spacing-lg) 0;
-    cursor: pointer;
-    border-radius: var(--border-radius-pill);
-    font-family: var(--font-family);
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-normal);
-    width: var(--button-width);
-}
-
-#addGmail {
-    background-color: transparent;
-    color: var(--color-text-primary);
-    border: 1px solid var(--color-text-secondary);
-    padding: var(--button-padding-vertical) var(--button-padding-horizontal);
-    margin: 0 0 var(--spacing-lg) 0;
-    cursor: pointer;
-    border-radius: var(--border-radius-pill);
-    font-family: var(--font-family);
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-normal);
-    width: var(--button-width);
-}
-
-/* Mailboxes Section - Based on Penpot Design */
-.mailboxes-section {
+.mailboxes-section,
+.sign-out-section {
     display: flex;
     flex-direction: column;
-    padding: 0;
-    border-radius: var(--border-radius);
-    width: var(--mailbox-width);
-    row-gap: var(--section-gap);
+    gap: var(--spacing-lg);
 }
 
 .mailbox-header {
     display: flex;
-    flex-direction: row;
-    align-items: center;
     justify-content: space-between;
-    width: var(--mailbox-width);
-    height: var(--mailbox-header-height);
-    padding: 0;
-    border-radius: var(--border-radius);
-    gap: 0;
-    flex-shrink: 0;
-}
-
-.mailbox-title {
+    align-items: center;
     font-size: var(--font-size-title);
     font-weight: var(--font-weight-normal);
-    font-family: var(--font-family);
-    color: var(--color-text-primary);
-    margin: 0;
-    padding: 0;
-    width: var(--mailbox-title-width);
-    height: var(--mailbox-title-height);
-    line-height: var(--line-height-base);
-    border-radius: var(--border-radius);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-divider);
+}
+
+.mailbox-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.mailbox-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 var(--spacing-md);
+    height: 32px;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    transition: background-color 0.2s;
+    font-size: var(--font-size-body);
+}
+
+.mailbox-item:hover,
+.mailbox-item.active {
+    background-color: var(--color-accent-light);
+}
+
+.mailbox-item.active .mailbox-name {
+    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-medium);
+}
+
+.mailbox-count {
+    color: var(--color-text-subtle);
+    font-size: var(--font-size-body);
 }
 
 .edit-button {
@@ -195,15 +109,9 @@ body {
     border: 1px solid var(--color-text-secondary);
     padding: var(--spacing-sm) var(--spacing-md);
     cursor: pointer;
-    border-radius: var(--border-radius-pill);
-    font-size: var(--font-size-base);
+    border-radius: var(--radius-pill);
+    font-size: var(--font-size-body);
     font-weight: var(--font-weight-normal);
-    font-family: var(--font-family);
-    width: var(--edit-button-width);
-    height: var(--edit-button-height);
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .edit-button:hover {
@@ -211,231 +119,147 @@ body {
     color: white;
 }
 
-.mailbox-list {
+/* Buttons */
+#composeButton,
+#addGmail {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-family);
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-normal);
+    cursor: pointer;
+    border: none;
+}
+
+#composeButton {
+    background-color: var(--color-text-secondary);
+    color: var(--color-background);
+    margin-bottom: var(--spacing-lg);
+}
+
+#addGmail {
+    background-color: transparent;
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-text-secondary);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Button with icon - reduce left padding */
+button:has(> [class*="icon"]) {
+    padding-left: 8px !important;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: var(--spacing-lg);
     display: flex;
     flex-direction: column;
-    gap: 0;
-    padding: var(--spacing-sm) 0;
-    width: var(--mailbox-width);
-    border-radius: var(--border-radius);
-    row-gap: var(--item-gap);
+    min-width: 0;
 }
 
-.mailbox-list .divider:first-child {
-    display: none;
-}
-
-.mailbox-item {
+.messages-container {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.messages-header {
+    display: flex;
     justify-content: space-between;
-    height: var(--mailbox-item-height);
-    padding: 0 var(--spacing-md);
-    cursor: pointer;
-    transition: background-color 0.2s;
-    gap: var(--item-gap);
-    border-radius: var(--border-radius);
+    align-items: center;
+}
+
+.messages-title {
+    font-size: var(--font-size-title);
+    font-weight: var(--font-weight-normal);
     margin: 0;
 }
 
-.mailbox-item:hover {
+.messages-subtitle {
+    font-size: var(--font-size-body);
+    color: var(--color-text-subtle);
+    margin: 0;
+}
+
+.search-button {
+    background-color: transparent;
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-text-secondary);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-body);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-button:hover {
+    background-color: var(--color-text-secondary);
+    color: white;
+}
+
+.options-icon {
+    font-size: var(--font-size-title);
+    color: var(--color-text-subtle);
+    cursor: pointer;
+}
+
+.accounts-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    margin: var(--spacing-lg) 0;
+}
+
+.accounts-list button {
+    width: 100%;
+    padding: var(--spacing-sm);
+    background-color: transparent;
+    border: 1px solid var(--color-divider);
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    font-family: var(--font-family);
+    font-size: var(--font-size-body);
+    text-align: left;
+}
+
+.accounts-list button:hover {
     background-color: rgba(0, 0, 0, 0.05);
 }
 
-.mailbox-name {
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-normal);
-    font-family: var(--font-family);
-    color: var(--color-text-primary);
-    line-height: var(--line-height-base);
-    flex: 1;
-    text-align: left;
-    border-radius: var(--border-radius);
-}
-
-.mailbox-count {
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-normal);
-    font-family: var(--font-family);
-    color: var(--color-text-subtle);
-    line-height: var(--line-height-base);
-    padding: var(--spacing-xs);
-    min-width: var(--mailbox-count-min-width);
-    text-align: right;
-    border-radius: var(--border-radius);
-    box-sizing: border-box;
-}
-
-.mailbox-item.active {
-    background-color: rgba(82, 65, 205, 0.1);
-}
-
-.mailbox-item.active .mailbox-name {
-    color: var(--color-text-secondary);
-    font-weight: var(--font-weight-medium);
-}
-
-.divider {
-    width: 100%;
-    height: 1px;
-    background-color: var(--color-divider);
-    margin: 0;
-    flex-shrink: 0;
-    border-radius: var(--border-radius);
-}
-
-/* Sign Out Section - Based on Penpot Design */
-.sign-out-section {
-    margin-top: auto;
-    padding: var(--spacing-sm) var(--spacing-md);
-    width: var(--mailbox-width);
-    border-radius: var(--border-radius);
-}
-
-/* Welcome Screen Styles */
-.welcome-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-evenly;
-    padding: var(--welcome-container-padding);
-    position: absolute;
-    top: var(--welcome-container-top);
-    left: var(--welcome-container-left);
-    width: var(--welcome-container-width);
-    height: auto;
-    background: linear-gradient(
-        to top right,
-        var(--welcome-gradient-start),
-        var(--welcome-gradient-end)
-    );
-    border-radius: var(--welcome-container-border-radius);
-}
-
-.welcome-content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    width: 100%;
-    height: var(--welcome-container-height);
-    gap: 3rem 3.5rem; /* gap-y-12 gap-x-14 */
-}
-
-.welcome-logo {
-    position: relative;
-    width: var(--welcome-logo-size);
-    height: var(--welcome-logo-size);
-}
-
-.logo-gradient {
-    position: absolute;
-    width: var(--welcome-logo-size);
-    height: var(--welcome-logo-size);
-    background: linear-gradient(
-        to bottom,
-        var(--welcome-logo-gradient-start),
-        var(--welcome-logo-gradient-end)
-    );
-}
-
-.logo-circle {
-    border-radius: 50%;
-    position: absolute;
-    width: var(--welcome-circle-size);
-    height: var(--welcome-circle-size);
-    border: var(--welcome-circle-border);
-}
-
-.logo-circles-container {
-    position: absolute;
-    width: var(--welcome-large-circle-size);
-    height: var(--welcome-large-circle-size);
-}
-
-.welcome-text-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    width: 100%;
-    height: auto;
-    gap: 1.5rem; /* gap-y-6 */
-}
-
-.welcome-text-group {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    width: 100%;
-    height: auto;
-    gap: 2rem; /* gap-y-8 */
-}
-
-.welcome-text {
-    position: relative;
-    width: 100%;
-    height: var(--welcome-text-height);
-    color: var(--color-text-primary);
-    font-size: var(--welcome-text-size);
-    line-height: var(--line-height-base);
-}
-
-.connect-button {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: var(--welcome-button-padding-y) var(--welcome-button-padding-x);
-    gap: var(--welcome-button-gap);
-    width: auto;
-    border-radius: var(--border-radius-pill);
-    border: var(--welcome-button-border);
-    background-color: transparent;
-    cursor: pointer;
-}
-
-.connect-icon {
-    position: relative;
-    width: var(--welcome-svg-size);
-    height: var(--welcome-svg-size);
-}
-
-.connect-svg {
-    position: absolute;
-    width: var(--welcome-svg-size);
-    height: var(--welcome-svg-size);
-}
-
-.connect-text {
-    color: var(--welcome-button-text-color);
-    font-size: var(--font-size-base);
-}
-
+/* Sign Out */
 .sign-out-container {
     display: flex;
-    flex-direction: row;
-    /* gap: var(--panel-gap); Ajustado: eliminamos el gap */
-    align-items: center; /* Align items center */
-    justify-content: space-between; /* Space between Gmail and log-out */
-    width: 100%;
-    padding: 0;
-    border-radius: var(--border-radius);
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* Welcome Screen Styles */
+.sign-out-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    cursor: pointer;
+    font-size: var(--font-size-body);
+}
+
+.sign-out-account {
+    color: var(--color-text-primary);
+}
+
+/* Welcome Screen */
 .welcome-container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-evenly;
-    padding: 3.5rem;
+    padding: 56px;
     position: absolute;
     top: -202px;
     left: -449px;
     width: 1496px;
-    height: auto;
     background: linear-gradient(to top right, #c4efef, #ffffff00);
     border-radius: 32px;
 }
@@ -444,10 +268,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: flex-start;
     width: 100%;
-    height: 651px;
-    gap: 3rem 3.5rem;
+    gap: 32px;
 }
 
 .welcome-logo {
@@ -471,240 +293,37 @@ body {
     border: 1px solid #000;
 }
 
-.logo-circles-container {
-    position: absolute;
-    width: 192px;
-    height: 192px;
-}
-
-.welcome-text-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    width: 100%;
-    height: auto;
-    gap: 1.5rem;
-}
-
 .welcome-text-group {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    width: 100%;
-    height: auto;
-    gap: 2rem;
+    gap: 32px;
 }
 
 .welcome-text {
-    position: relative;
-    width: 100%;
-    height: 30px;
-    color: #000;
-    font-size: 25px;
-    line-height: 1.2;
+    font-size: var(--font-size-title);
+    font-weight: var(--font-weight-normal);
+    margin: 0;
 }
 
 .connect-button {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    padding: 0.5rem 1rem;
-    gap: 0.5rem;
-    width: auto;
-    border-radius: 100px;
-    border: 1px solid #5241cd;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-text-secondary);
     background-color: transparent;
     cursor: pointer;
+    font-size: var(--font-size-body);
+    color: var(--color-text-secondary);
 }
 
 .connect-icon {
-    position: relative;
     width: 24px;
     height: 24px;
 }
 
-.connect-svg {
-    position: absolute;
-    width: 24px;
-    height: 24px;
-}
-
-.connect-text {
-    color: #5241cd;
-    font-size: 1rem;
-}
-
-.sign-out-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: var(--item-gap);
-    padding: 0;
-    cursor: pointer;
-    height: 28px;
-    justify-content: space-between;
-    border-radius: var(--border-radius);
-}
-
-.sign-out-icon {
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-normal);
-    font-family: var(--font-family);
-    color: var(--color-text-secondary);
-    line-height: var(--line-height-base);
-    padding: var(--spacing-xs);
-    min-width: 55px;
-    border-radius: var(--border-radius);
-}
-
-.sign-out-account {
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-normal);
-    font-family: var(--font-family);
-    color: var(--color-text-primary);
-    line-height: var(--line-height-base);
-    flex: 1;
-    border-radius: var(--border-radius);
-}
-
-/* Legacy menu styles - kept for compatibility */
-.menu {
-    display: none;
-}
-
-.menu-item {
-    padding: 10px;
-    cursor: pointer;
-}
-
-.menu-item:hover {
-    background-color: #34495e;
-}
-
-.menu-item.active {
-    background-color: #3498db;
-}
-
-/* Main Content - Panel de Mensajes - Based on Penpot Design */
-.main-content {
-    flex: 1;
-    padding: var(--content-padding-vertical) var(--spacing-xl); /* Ajustado padding horizontal */
-    display: flex;
-    flex-direction: column;
-    border-radius: var(--border-radius-panel);
-    background-color: var(--color-background);
-    min-width: 0;
-}
-
-.messages-container {
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-    border-radius: var(--border-radius);
-    width: 100%;
-}
-
-.messages-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--section-gap);
-    padding: 0;
-    border-radius: var(--border-radius);
-    width: 100%;
-}
-
-.messages-header-left {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xs);
-}
-
-.messages-title {
-    font-size: var(--font-size-title);
-    font-weight: var(--font-weight-normal);
-    font-family: var(--font-family);
-    color: var(--color-text-primary);
-    margin: 0;
-    line-height: var(--line-height-base);
-}
-
-.messages-subtitle {
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-normal);
-    font-family: var(--font-family);
-    color: var(--color-text-subtle);
-    margin: 0;
-    line-height: var(--line-height-base);
-}
-
-.messages-header-right {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: var(--spacing-sm);
-}
-
-.search-button {
-    background-color: transparent;
-    color: var(--color-text-secondary);
-    border: 1px solid var(--color-text-secondary);
-    padding: var(--button-padding-vertical) var(--button-padding-horizontal);
-    cursor: pointer;
-    border-radius: var(--border-radius-button);
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-normal);
-    font-family: var(--font-family);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.search-button:hover {
-    background-color: var(--color-text-secondary);
-    color: white;
-}
-
-.options-icon {
-    font-size: var(
-        --font-size-title
-    ); /* Usar el tamaño del título para que el icono sea grande */
-    color: var(--color-text-subtle);
-    cursor: pointer;
-}
-
-.accounts-list {
-    padding: 0 var(--spacing-md);
-    margin-top: var(--section-gap); /* Margen para separar de mailboxes */
-    margin-bottom: var(
-        --section-gap
-    ); /* Margen antes de la sección de sign-out */
-    width: 240px;
-    border-radius: var(--border-radius);
-}
-
-.accounts-list button {
-    width: 100%;
-    margin-bottom: var(--spacing-sm);
-    padding: var(--spacing-sm);
-    background-color: transparent;
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-pill);
-    cursor: pointer;
-    font-family: var(--font-family);
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-normal);
-    text-align: left;
-    line-height: var(--line-height-base);
-}
-
-.accounts-list button:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-}
-
+/* Modal */
 #email-modal-content {
     animation: modalFadeIn 0.3s ease-out;
 }
@@ -720,7 +339,7 @@ body {
     }
 }
 
-/* Compose Window Styles */
+/* Compose Window */
 .compose-container {
     position: fixed;
     top: 50%;
@@ -728,9 +347,9 @@ body {
     transform: translate(-50%, -50%);
     width: 600px;
     background-color: white;
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 20px;
+    padding: var(--spacing-lg);
     z-index: 1000;
 }
 
@@ -738,50 +357,55 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: var(--spacing-lg);
 }
 
 .compose-header h2 {
     margin: 0;
+    font-size: var(--font-size-title);
 }
 
 .compose-header button {
-    background-color: #e74c3c;
+    background-color: var(--color-error);
     color: white;
     border: none;
-    padding: 8px 16px;
-    border-radius: var(--border-radius-button);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--radius-sm);
     cursor: pointer;
+    font-size: var(--font-size-body);
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: var(--spacing-lg);
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: var(--spacing-sm);
     font-weight: var(--font-weight-medium);
 }
 
 .form-group input,
 .form-group textarea {
     width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    padding: var(--spacing-sm);
+    border: 1px solid var(--color-divider);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-family);
+    font-size: var(--font-size-body);
 }
 
 #sendButton {
-    background-color: var(--send-button-background-color);
-    color: var(--send-button-text-color);
+    background-color: var(--color-text-secondary);
+    color: white;
     border: none;
-    padding: var(--send-button-padding-vertical)
-        var(--send-button-padding-horizontal);
-    border-radius: var(--border-radius-button);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--radius-sm);
     cursor: pointer;
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-normal);
 }
 
 #sendButton:hover {
-    background-color: var(--send-button-hover-background-color);
+    background-color: #4235a8;
 }
