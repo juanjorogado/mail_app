@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mail App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/components.css" />
+    <link rel="stylesheet" href="styles/layout.css" />
+    <link rel="stylesheet" href="styles/notifications.css" />
+    <script type="module" src="main.js"></script>
+  </head>
+  <body>
+    <!-- Onboarding Screen -->
+    <div id="onboarding-screen" class="onboarding-screen">
+      <div class="logo">
+        <div class="logo-fallback">Mail App</div>
+      </div>
+      <div class="onboarding-text-button-container">
+        <h1>Conecta tu cuenta de Gmail para comenzar</h1>
+        <button id="connect-account-button" class="connect-button">
+          Conectar con Google
+        </button>
+      </div>
+    </div>
+
+    <!-- Main App Screen -->
+    <div id="main-app-screen" class="main-app-screen hidden">
+      <div class="main-panel">
+        <!-- Left Panel: Mailboxes -->
+        <div id="mailboxesPanel" class="panel-section">
+          <div class="section-content">
+            <div class="flex justify-between items-center mb-4">
+              <h2 class="headline" style="margin: 0">Buzones</h2>
+              <button id="edit-mailboxes" class="edit-button">Editar</button>
+            </div>
+            <div class="space-y-1 mb-4" id="mailboxes-list">
+              <div class="mailbox-item active" data-mailbox="all">
+                <span>Recibidos</span>
+                <span class="mailbox-count" id="count-all">0</span>
+              </div>
+              <div class="mailbox-item" data-mailbox="unread">
+                <span>No leídos</span>
+                <span class="mailbox-count" id="count-unread">0</span>
+              </div>
+              <div class="mailbox-item" data-mailbox="today">
+                <span>Hoy</span>
+                <span class="mailbox-count" id="count-today">0</span>
+              </div>
+              <div class="mailbox-item" data-mailbox="flagged">
+                <span>Con indicador</span>
+                <span class="mailbox-count" id="count-flagged">0</span>
+              </div>
+            </div>
+            <button id="compose-button" class="compose-button">Escribir</button>
+          </div>
+          <div class="section-footer">
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              "
+            >
+              <span id="currentAccount" class="account-alias">Gmail</span>
+              <a href="#" id="logout-button" class="link-button">Logout</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-divider resizable"></div>
+
+        <!-- Center Panel: Message List -->
+        <div
+          id="messageListPanel"
+          class="panel-section"
+          style="width: 50%; min-width: 360px"
+        >
+          <div class="section-content-full">
+            <div
+              class="flex justify-between items-start mb-3"
+              style="padding: var(--space-4)"
+            >
+              <div>
+                <h2
+                  id="current-mailbox-name"
+                  class="headline"
+                  style="margin: 0"
+                >
+                  Recibidos
+                </h2>
+                <div
+                  id="current-mailbox-count"
+                  class="mailbox-count"
+                  style="margin-top: 6px"
+                >
+                  0 mensajes
+                </div>
+              </div>
+            </div>
+            <div id="message-list" class="scrollable-content">
+              <!-- Messages will be rendered here -->
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-divider resizable"></div>
+
+        <!-- Right Panel: Message Detail -->
+        <div
+          id="messageDetailPanel"
+          class="panel-section"
+          style="width: 50%; min-width: 360px"
+        >
+          <div class="section-content-full">
+            <div
+              id="message-detail"
+              style="padding: var(--space-4); min-height: 100%"
+            >
+              <h2 id="message-title">Selecciona un mensaje</h2>
+              <div style="margin-top: var(--space-4)">
+                <div style="margin-bottom: var(--space-2)">
+                  <strong>De:</strong> <span id="message-sender"></span>
+                </div>
+                <div style="margin-bottom: var(--space-2)">
+                  <strong>Para:</strong> <span id="message-recipient"></span>
+                </div>
+                <div style="margin-bottom: var(--space-2)">
+                  <strong>Fecha:</strong> <span id="message-date"></span>
+                </div>
+                <hr
+                  style="
+                    margin: var(--space-4) 0;
+                    border: none;
+                    border-top: 1px solid var(--gray-200);
+                  "
+                />
+                <div id="message-body" style="min-height: 200px">
+                  <div style="color: var(--text-tertiary)">
+                    Selecciona un mensaje para ver su contenido
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

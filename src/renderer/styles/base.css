@@ -1,0 +1,79 @@
+/**
+ * Base CSS - Dieter Rams Design Philosophy
+ * Less, but better. Minimal variables, maximum function.
+ */
+
+:root {
+  /* Dieter Rams Color Palette - Less but better */
+  --color-bg: #f7f7f5;
+  --color-bg-secondary: #f0f0ee;
+  --color-bg-tertiary: #e8e8e6;
+  --color-text: #1a1a1a;
+  --color-text-secondary: #666666;
+  --color-text-muted: #999999;
+  --color-border: #d4d4d0;
+  --color-accent: #d97706;
+  --color-accent-hover: #b45309;
+
+  /* Typography - Helvetica only, two sizes */
+  --font-base: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-family: var(--font-base);
+  --font-size-body: 16px;
+  --font-size-headline: 24px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 600;
+  --line-height-body: 1.5;
+  --line-height-headline: 1.3;
+
+  /* Spacing scale - 8px base */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-base);
+  font-size: var(--font-size-body);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Focus - Subtle */
+:focus-visible {
+  outline: 1px solid var(--color-accent);
+  outline-offset: 1px;
+}
+
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

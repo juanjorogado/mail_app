@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Compose Email</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles/styles.css" />
+  </head>
+  <body>
+    <script src="../utils/notifications.js"></script>
+    <script src="../utils/validation.js"></script>
+    <div class="compose-container">
+      <div class="compose-header">
+        <h2 id="composeTitle">Compose Email</h2>
+        <button id="closeCompose" class="button button-secondary">Close</button>
+      </div>
+      <form id="composeForm">
+        <div class="form-group">
+          <label for="accountSelect">Account:</label>
+          <select id="accountSelect"></select>
+        </div>
+        <div class="form-group" id="replyToGroup" style="display: none">
+          <label for="replyTo">In Reply To:</label>
+          <input type="text" id="replyTo" readonly />
+        </div>
+        <div class="form-group" id="originalSubjectGroup" style="display: none">
+          <label for="originalSubject">Original Subject:</label>
+          <input type="text" id="originalSubject" readonly />
+        </div>
+        <div class="form-group">
+          <label for="to">To:</label>
+          <input type="email" id="to" required />
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject:</label>
+          <input type="text" id="subject" required />
+        </div>
+        <div class="form-group">
+          <label for="body">Body:</label>
+          <textarea id="body" rows="10" required></textarea>
+        </div>
+        <button type="submit" id="sendButton" class="button button-primary">
+          Send
+        </button>
+      </form>
+    </div>
+    <script src="compose.js"></script>
+  </body>
+</html>
